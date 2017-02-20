@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<package name ="com.tieao.mmo.deamon">
+  <using>
+  </using>
+  <datastructures>
+  </datastructures>
+
+  <service name="File"> 
+    <server>
+      <transaction name="RequestFileSend">
+        <param name="file" type="String"/>
+        <param name="uploadToken" type="int"/>
+        <param name="size" type="int"/>
+      </transaction>
+
+      <transaction name="RequestFileBlock">
+        <param name="file" type="String"/>
+        <param name="blockId" type="int"/>
+        <param name="size" type="int"/>
+        <param name="stream" type="ByteArray"/>
+        <param name="special" type="int" />
+      </transaction>
+
+      <!--transaction name="RequetFileDownload">
+        <param name="file" type="String"/>
+        <param name="localfile" type="String"/>
+        <param name="uploadToken" type="int"/>
+      </transaction>
+      <transaction name="FileBlockResponse">
+        <param name="file" type="int"/>
+        <param name="blockId" type="int"/>
+        <param name="blockSize" type="int"/>
+        <param name="receivedSize" type="int"/>
+        <param name="expectSize" type="int"/>
+      </transaction>
+
+      <transaction name="DownloadFinishResponse">
+        <param name="file" type="int"/>
+        <param name="totalSize" type="int"/>
+        <param name="md5" type="string"/>
+      </transaction-->
+      <transaction name="StartBatch">
+        <param name="name" type="string"/>
+      </transaction>
+        
+      <transaction name="BatchComplete">
+        <param name="success" type="bool"/>
+        <param name="name" type="string"/>
+      </transaction>
+      
+      <transaction name="CreateDirectory">
+        <comment>Create a directory under current working directory</comment>
+        <param name="name" type="string"/>
+      </transaction>
+
+      <transaction name="ListDirectorys">
+        <comment>List directories under current working directory</comment>
+        <param name="name" type="string"/>
+      </transaction>
+
+      <transaction name="DeleteDirectory">
+        <param name="name" type="string"/>
+      </transaction>
+
+      <transaction name="DeleteFile">
+        <param name="name" type="string"/>
+      </transaction>
+      
+      <transaction name="SetWorkingDirectory">
+        <param name="name" type="string"/>
+      </transaction>
+
+      <transaction name="SendDirectoryFailed">
+      </transaction>
+
+      <transaction name="SendFileFailed">
+        <param name="name" type="string"/>
+        <param name="reason" type="string"/>
+      </transaction>
+    </server>
+    <client>
+      <transaction name="RequestFileDownload">
+        <param name="file" type="String"/>
+        <param name="remoteFile" type="String"/>
+        <param name="isDir" type="bool"/>
+      </transaction>
+      
+      <transaction name="FileSendResponse">
+        <param name="file" type="int"/>
+        <param name="uploadToken" type="int"/>
+        <!-- -1 when invalid -->
+      </transaction>
+      
+      <transaction name="SendFinishResponse">
+        <param name="file" type="int"/>
+        <param name="totalSize" type="int"/>
+        <param name="expectSize" type="int"/>
+        <param name="md5" type="string"/>
+      </transaction>
+      <transaction name="FileBlockResponse">
+        <param name="file" type="int"/>
+        <param name="blockId" type="int"/>
+
+      </transaction>
+      <!--transaction name="FileDownloadResponse">
+        <param name="file" type="String"/>
+        <param name="id" type="int"/>
+      </transaction>
+     
+      <transaction name="DownFileBlockResponse">
+        <param name="file" type="String"/>
+        <param name="blockId" type="int"/>
+        <param name="size" type="int"/>
+        <param name="stream" type="ByteArray"/>
+        <param name="special" type="int" />
+      </transaction-->
+
+      <transaction name="CreateDirectoryResult">
+        <param name="result" type="int"/>
+        <param name="desc" type="string"/>
+      </transaction>
+
+      <transaction name="ListDirectorysResult">
+        <param name="result" type="int"/>
+        <param name="directories" type="StringSequence"/>
+      </transaction>
+
+      <transaction name="DeleteDirectoryResult">
+        <param name="result" type="int"/>
+        <param name="desc" type="string"/>
+      </transaction>
+
+      <transaction name="DeleteFileResult">
+        <param name="result" type="int"/>
+        <param name="desc" type="string"/>
+      </transaction>
+
+      <transaction name="SetWorkingDirectoryResult">
+        <param name="result" type="int"/>
+        <param name="desc" type="string"/>
+      </transaction>
+    </client>
+  </service>
+</package>

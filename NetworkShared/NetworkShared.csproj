@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9BC93DBB-196B-4608-A6FF-9C8C1720105F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>com.tieao.network</RootNamespace>
+    <AssemblyName>NetworkShared</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>发布\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\ServerBin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NO_BUFFER</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\ServerBin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\ServerBin\DLL\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NO_BUFFER</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\ServerBin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ID.Foundation, Version=1.1.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ref\ID.Foundation.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="deamon\protocol\deamon_protocol_gen.cs" />
+    <Compile Include="deamon\protocol\deamon_protocol_gen_ds.cs" />
+    <Compile Include="deamon\protocol\deamon_protocol_gen_server.cs" />
+    <Compile Include="deamon\protocol\monitor_protocol_gen.cs" />
+    <Compile Include="deamon\protocol\monitor_protocol_gen_ds.cs" />
+    <Compile Include="deamon\protocol\monitor_protocol_gen_server.cs" />
+    <Compile Include="file\FileAssembler.cs" />
+    <Compile Include="file\FileSendSession.cs" />
+    <Compile Include="file\FileSenderCallback.cs" />
+    <Compile Include="file\FileReceiveSession.cs" />
+    <Compile Include="file\FileTransferSession.cs" />
+    <Compile Include="file\protocol\file_protocol_gen.cs" />
+    <Compile Include="file\protocol\file_protocol_gen_ds.cs" />
+    <Compile Include="file\protocol\file_protocol_gen_server.cs" />
+    <Compile Include="file\SendFileRequest.cs" />
+    <Compile Include="Internal\protocol\Custom_Type_protocol_gen.cs" />
+    <Compile Include="Internal\protocol\Custom_Type_protocol_gen_ds.cs" />
+    <Compile Include="Internal\protocol\Custom_Type_protocol_gen_server.cs" />
+    <Compile Include="Internal\protocol\Internal_protocol_gen_ds.cs" />
+    <Compile Include="Internal\protocol\Internal_Server_protocol_gen.cs" />
+    <Compile Include="Internal\protocol\Internal_Server_protocol_gen_server.cs" />
+    <Compile Include="Protocol\protocol_gen.cs" />
+    <Compile Include="Protocol\protocol_gen_ds.cs" />
+    <Compile Include="Protocol\protocol_gen_server.cs" />
+    <Compile Include="utils\DllLoader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="deamon\protocol\deamonprotocol.xml" />
+    <Content Include="deamon\protocol\monitorprotocol.xml" />
+    <Content Include="file\protocol\fileprotocol.xml" />
+    <Content Include="Internal\protocol\CustomTypeInProtocol.xml" />
+    <Content Include="Internal\protocol\InternalServerProtocol.xml" />
+    <Content Include="Protocol\protocol.xml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>$(SolutionDir)\ref\Idea.CodeGen.exe cs_client_raw $(ProjectDir)\file\protocol\fileprotocol.xml $(ProjectDir)\file\protocol\file_protocol_gen.cs
+$(SolutionDir)\ref\Idea.CodeGen.exe cs_server_raw $(ProjectDir)\file\protocol\fileprotocol.xml $(ProjectDir)\file\protocol\file_protocol_gen_server.cs
+$(SolutionDir)\ref\Idea.CodeGen.exe cs_ds $(ProjectDir)\file\protocol\fileprotocol.xml $(ProjectDir)\file\protocol\file_protocol_gen_ds.cs
+
+$(SolutionDir)\ref\Idea.CodeGen.exe cs_client_raw $(ProjectDir)\deamon\protocol\deamonprotocol.xml $(ProjectDir)\deamon\protocol\deamon_protocol_gen.cs
+$(SolutionDir)\ref\Idea.CodeGen.exe cs_server_raw $(ProjectDir)\deamon\protocol\deamonprotocol.xml $(ProjectDir)\deamon\protocol\deamon_protocol_gen_server.cs
+$(SolutionDir)\ref\Idea.CodeGen.exe cs_ds $(ProjectDir)\deamon\protocol\deamonprotocol.xml $(ProjectDir)\deamon\protocol\deamon_protocol_gen_ds.cs
+
+$(SolutionDir)\ref\Idea.CodeGen.exe cs_client_raw $(ProjectDir)\deamon\protocol\monitorprotocol.xml $(ProjectDir)\deamon\protocol\monitor_protocol_gen.cs
+$(SolutionDir)\ref\Idea.CodeGen.exe cs_server_raw $(ProjectDir)\deamon\protocol\monitorprotocol.xml $(ProjectDir)\deamon\protocol\monitor_protocol_gen_server.cs
+$(SolutionDir)\ref\Idea.CodeGen.exe cs_ds $(ProjectDir)\deamon\protocol\monitorprotocol.xml $(ProjectDir)\deamon\protocol\monitor_protocol_gen_ds.cs
+
+$(SolutionDir)\ref\Idea.CodeGen.exe cs_client_raw $(ProjectDir)\Internal\protocol\InternalServerProtocol.xml $(ProjectDir)\Internal\protocol\Internal_Server_protocol_gen.cs
+$(SolutionDir)\ref\Idea.CodeGen.exe cs_server_raw $(ProjectDir)\Internal\protocol\InternalServerProtocol.xml $(ProjectDir)\Internal\protocol\Internal_Server_protocol_gen_server.cs
+$(SolutionDir)\ref\Idea.CodeGen.exe cs_ds $(ProjectDir)\Internal\protocol\InternalServerProtocol.xml $(ProjectDir)\Internal\protocol\Internal_protocol_gen_ds.cs
+
+$(SolutionDir)\ref\Idea.CodeGen.exe cs_client_raw $(ProjectDir)\Internal\protocol\CustomTypeInProtocol.xml $(ProjectDir)\Internal\protocol\Custom_Type_protocol_gen.cs
+$(SolutionDir)\ref\Idea.CodeGen.exe cs_server_raw $(ProjectDir)\Internal\protocol\CustomTypeInProtocol.xml $(ProjectDir)\Internal\protocol\Custom_Type_protocol_gen_server.cs
+$(SolutionDir)\ref\Idea.CodeGen.exe cs_ds $(ProjectDir)\Internal\protocol\CustomTypeInProtocol.xml $(ProjectDir)\Internal\protocol\Custom_Type_protocol_gen_ds.cs
+
+$(SolutionDir)\ref\Idea.CodeGen.exe cs_client_raw $(ProjectDir)\Protocol\protocol.xml $(ProjectDir)\Protocol\protocol_gen.cs
+$(SolutionDir)\ref\Idea.CodeGen.exe cs_server_raw $(ProjectDir)\Protocol\protocol.xml $(ProjectDir)\Protocol\protocol_gen_server.cs
+$(SolutionDir)\ref\Idea.CodeGen.exe cs_ds $(ProjectDir)\Protocol\protocol.xml $(ProjectDir)\Protocol\protocol_gen_ds.cs</PreBuildEvent>
+  </PropertyGroup>
+</Project>

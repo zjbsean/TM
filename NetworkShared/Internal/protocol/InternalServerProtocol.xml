@@ -1,0 +1,674 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<package name ="com.tieao.mmo.interval">
+  <using>
+    <package name ="com.tieao.mmo.CustomTypeInProtocol"/>
+  </using>
+  
+  <datastructures>
+
+    <!-- 服务类型枚举 -->
+    <enum name="eServerType">
+      <element name="GateWay"/>
+      <element name="Game"/>
+      <element name="Center"/>
+      <element name="Public"/>
+      <element name="GameData"/>
+      <element name="DataBase"/>
+      <element name="Rank"/>
+      <element name="Log"/>
+      <element name="WorldBoss"/>
+      <element name="Chat"/>
+      <element name="CommandSender"/>
+      
+      <element name="CrossRealm"/>
+      <element name="CrossRealm_Battle"/>
+      
+      <element name="Protal"/>
+      <element name="GM"/>
+      <element name="Platform_Docking"/>
+      
+      <element name="MoniteorNode"/>
+      <element name="MoniteorServer"/>
+      
+      <element name="XDGateway"/>
+      <element name="Entry"/>
+      <element name="GiftCode"/>
+      <element name="ClientLogger"/>
+      
+      <element name="Unknow"/>
+    </enum>
+
+    <!-- 服务信息 -->
+    <struct name="PtServerInfo" class="true">
+      <field name="m_Name" type="string"/>
+      <field name="m_Type" type="eServerType"/>
+      <field name="m_Address" type="string"/>
+      <field name="m_Port" type="int"/>
+      <field name="m_OutShortConnectionPort" type="int"/>
+      <field name="m_OutLongConnectionPort" type="int"/>
+      <field name="m_SessionID" type="int"/>
+      <field name="m_ProcessID" type="int"/>
+      <field name="m_ServerID" type="int"/>
+    </struct>
+    <sequence name="PtServerList" element="PtServerInfo"/>
+
+    <!-- 玩家分配服务信息-->
+    <struct name="PtPlayerAllocSvrInfo" class="true">
+      <field name="svrType" type="eServerType"/>
+      <field name="svrName" type="string"/>
+    </struct>
+    <sequence name="PtPlayerAllocSvrList" element="PtPlayerAllocSvrInfo"/>
+
+    <!-- 数据库配置信息 -->
+    <struct name="TDBCfg" class="true">
+      <field name="ID" type="int"/>
+      <field name="dbType" type="int"/>
+      <field name="machineName" type="string"/>
+      <field name="lanIPAddr" type="string"/>
+      <field name="dbName" type="string"/>
+      <field name="loginName" type="string"/>
+      <field name="passworld" type="string"/>
+      <field name="port" type="int"/>
+      <field name="childConnCount" type="int"/>
+    </struct>
+    <sequence name="TDBCfgList" element="TDBCfg"/>
+    
+    <!-- 服务器监控基础数据 -->
+    <struct name="TServerMoniteorBaseData" class="true">
+      <field name="gameID" type="int"/>
+      <field name="zoomID" type="int"/>
+      <field name="name" type="string"/>
+      <field name="index" type="int"/>
+      <field name="state" type="int"/>
+      <field name="recordTime" type="int"/>
+    </struct>
+
+    <!-- PortalServer监控数据 -->
+    <struct name="TPortalServerMoniteorData" class="true">
+      <field name="baseData" type="TServerMoniteorBaseData"/>
+      <field name="dealProtocolCount" type="int"/>
+      <field name="connectCount" type="int"/>
+    </struct>
+
+    <!-- PortalServer配置数据 -->
+    <struct name="TPortalServerCfgData" class="true">
+      <field name="gameID" type="int"/>
+      <field name="index" type="int"/>
+      <field name="allowLowVersion" type="string"/>
+      <field name="machineName" type="string"/>
+      <field name="wanIPAddr" type="string"/>
+      <field name="outPort" type="int"/>
+      <field name="inPort" type="int"/>
+      <field name="platformDockingServer" type="TIDStrKeyValue"/>
+      <field name="pushNotice" type="string"/>
+    </struct>
+    <sequence name="TPortalServerCfgDataList" element="TPortalServerCfgData"/>
+
+    <!-- PortalServer工具数据 -->
+    <struct name="TPortalServerToolData" class="true">
+      <field name="moniteorData" type="TPortalServerMoniteorData"/>
+      <field name="configData" type="TPortalServerCfgData"/>
+    </struct>
+    <sequence name="TPortalServerToolDataList" element="TPortalServerToolData"/>
+
+    <!-- 平台信息 -->
+    <struct name="TPlatformCfgData">
+      <field name="platformType" type="int"/>
+      <field name="name" type="string"/>
+    </struct>
+    <sequence name="TPlatformCfgDataList" element="TPlatformCfgData"/>
+    
+    <!-- PlatformDocking配置数据 -->
+    <struct name="TPlatformDockingServerCfgData" class="true">
+      <field name="gameID" type="int"/>
+      <field name="idnex" type="int"/>
+      <field name="platformIDList" type="TIntList"/>
+      <field name="wanIPAddr" type="string"/>
+      <field name="outPort" type="int"/>
+      <field name="inPort" type="int"/>
+      <field name="platformList" type="TPlatformCfgDataList"/>
+    </struct>
+    <sequence name="TPlatformDockingServerCfgDataList" element="TPlatformDockingServerCfgData"/>
+    
+    <!-- CenterServer监控数据 -->
+    <struct name="TCenterServerMoniteorData" class="true">
+      <field name="baseData" type="TServerMoniteorBaseData"/>
+      <field name="dealProtocolCount" type="int"/>
+      <field name="totalAccountCount" type="int"/>
+      <field name="loginCheckTimes" type="int"/>
+    </struct>
+    <sequence name="TCenterServerMoniteorDataList" element="TCenterServerMoniteorData"/>
+
+    <!-- CenterServer配置数据 -->
+    <struct name="TCenterServerCfgData" class="true">
+      <field name="gameID" type="int"/>
+      <field name="serverID" type="int"/>
+      <field name="serverGroupName" type="string"/>
+      <field name="machineName" type="string"/>
+      <field name="lanIPAddr" type="string"/>
+      <field name="inPort" type="int"/>
+      <field name="crossRealmServer" type="TIDStrKeyValue"/>
+      <field name="protalServerList" type="TIDStrKeyValueList"/>
+      <field name="gmServer" type="TIDStrKeyValue"/>
+      <field name="platformDockingServer" type="TIDStrKeyValue"/>
+    </struct>
+
+    <!-- CenterServer工具数据 -->
+    <struct name="TCenterServerToolData" class="true">
+      <field name="moniteorData" type="TCenterServerMoniteorData"/>
+      <field name="configData" type="TCenterServerCfgData"/>
+    </struct>
+
+    <!-- DataBaseServer监控数据 -->
+    <struct name="TDataBaseServerMoniteorData" class="true">
+      <field name="baseData" type="TServerMoniteorBaseData"/>
+      <field name="dealProtocolCount" type="int"/>
+      <field name="dbAccessCount" type="int"/>
+    </struct>
+    <sequence name="TDataBaseServerMoniteorDataList" element="TDataBaseServerMoniteorData"/>
+
+    <!-- DataBaseServer配置数据 -->
+    <struct name="TDataBaseServerCfgData" class="true">
+      <field name="gameID" type="int"/>
+      <field name="serverID" type="int"/>
+      <field name="machineName" type="string"/>
+      <field name="lanIPAddr" type="string"/>
+      <field name="inPort" type="int"/>
+      <field name="centerServer" type="TStrKeyValue"/>
+      <field name="dbCfgList" type="TDBCfgList"/>
+    </struct>
+
+    <!-- DataBaseServer工具数据 -->
+    <struct name="TDataBaseServerToolData" class="true">
+      <field name="moniteorData" type="TDataBaseServerMoniteorData"/>
+      <field name="configData" type="TDataBaseServerCfgData"/>
+    </struct>
+
+    <!-- GameDataServer监控数据 -->
+    <struct name="TGameDataServerMoniteorData" class="true">
+      <field name="baseData" type="TServerMoniteorBaseData"/>
+      <field name="dealProtocolCount" type="int"/>
+      <field name="objectCountInDelayUpdatePool" type="int"/>
+    </struct>
+    <sequence name="TGameDataServerMoniteorDataList" element="TGameDataServerMoniteorData"/>
+
+    <!-- GameDataServer配置数据 -->
+    <struct name="TGameDataServerCfgData" class="true">
+      <field name="gameID" type="int"/>
+      <field name="serverID" type="int"/>
+      <field name="machineName" type="string"/>
+      <field name="lanIPAddr" type="string"/>
+      <field name="inPort" type="int"/>
+      <field name="centerServer" type="TStrKeyValue"/>
+    </struct>
+
+    <!-- GameDataServer工具数据 -->
+    <struct name="TGameDataServerToolData" class="true">
+      <field name="moniteorData" type="TGameDataServerMoniteorData"/>
+      <field name="configData" type="TGameDataServerCfgData"/>
+    </struct>
+
+    <!-- GameServer监控数据 -->
+    <struct name="TGameServerMoniteorData" class="true">
+      <field name="baseData" type="TServerMoniteorBaseData"/>
+      <field name="dealProtocolCount" type="int"/>
+      <field name="playerCount" type="int"/>
+    </struct>
+    <sequence name="TGameServerMoniteorDataList" element="TGameServerMoniteorData"/>
+
+    <!-- GameServer配置数据 -->
+    <struct name="TGameServerCfgData" class="true">
+      <field name="gameID" type="int"/>
+      <field name="serverID" type="int"/>
+      <field name="machineName" type="string"/>
+      <field name="index" type="int"/>
+      <field name="lanIPAddr" type="string"/>
+      <field name="inPort" type="int"/>
+      <field name="centerServer" type="TStrKeyValue"/>
+    </struct>
+    <sequence name="TGameServerCfgDataList" element="TGameServerCfgData"/>
+
+    <!-- GameServer工具数据 -->
+    <struct name="TGameServerToolData" class="true">
+      <field name="moniteorData" type="TGameServerMoniteorData"/>
+      <field name="configData" type="TGameServerCfgData"/>
+    </struct>
+    <sequence name="TGameServerToolDataList" element="TGameServerToolData"/>
+
+    <!-- PublicLogicServer监控数据 -->
+    <struct name="TPublicLogicServerMoniteorData" class="true">
+      <field name="baseData" type="TServerMoniteorBaseData"/>
+      <field name="dealProtocolCount" type="int"/>
+      <field name="guildCount" type="int"/>
+      <field name="totalChatCount" type="int"/>
+    </struct>
+    <sequence name="TPublicLogicServerMoniteorDataList" element="TPublicLogicServerMoniteorData"/>
+
+    <!-- PublicLogicServer配置数据 -->
+    <struct name="TPublicLogicServerCfgData" class="true">
+      <field name="gameID" type="int"/>
+      <field name="serverID" type="int"/>
+      <field name="machineName" type="string"/>
+      <field name="lanIPAddr" type="string"/>
+      <field name="inPort" type="int"/>
+      <field name="centerServer" type="TStrKeyValue"/>
+    </struct>
+
+    <!-- PublicLogicServer工具数据 -->
+    <struct name="TPublicLogicToolData" class="true">
+      <field name="moniteorData" type="TPublicLogicServerMoniteorData"/>
+      <field name="configData" type="TPublicLogicServerCfgData"/>
+    </struct>
+
+    <!-- RankServer监控数据 -->
+    <struct name="TRankServerMoniteorData" class="true">
+      <field name="baseData" type="TServerMoniteorBaseData"/>
+      <field name="dealProtocolCount" type="int"/>
+    </struct>
+    <sequence name="TRankServerMoniteorDataList" element="TRankServerMoniteorData"/>
+
+    <!-- RankServer配置数据 -->
+    <struct name="TRankServerCfgData" class="true">
+      <field name="gameID" type="int"/>
+      <field name="serverID" type="int"/>
+      <field name="machineName" type="string"/>
+      <field name="lanIPAddr" type="string"/>
+      <field name="inPort" type="int"/>
+      <field name="centerServer" type="TStrKeyValue"/>
+      <field name="dbCfgList" type="TDBCfgList"/>
+    </struct>
+
+    <!-- RankServer工具数据 -->
+    <struct name="TRankServerToolData" class="true">
+      <field name="moniteorData" type="TRankServerMoniteorData"/>
+      <field name="configData" type="TRankServerCfgData"/>
+    </struct>
+
+    <!-- ChatServer监控数据 -->
+    <struct name="TChatServerMoniteorData" class="true">
+      <field name="baseData" type="TServerMoniteorBaseData"/>
+      <field name="dealProtocolCount" type="int"/>
+    </struct>
+    <sequence name="TChatServerMoniteorDataList" element="TChatServerMoniteorData"/>
+
+    <!-- ChatServer配置数据 -->
+    <struct name="TChatServerCfgData" class="true">
+      <field name="gameID" type="int"/>
+      <field name="serverID" type="int"/>
+      <field name="machineName" type="string"/>
+      <field name="lanIPAddr" type="string"/>
+      <field name="inPort" type="int"/>
+      <field name="centerServer" type="TStrKeyValue"/>
+    </struct>
+
+    <!-- ChatServer工具数据 -->
+    <struct name="TChatServerToolData" class="true">
+      <field name="moniteorData" type="TChatServerMoniteorData"/>
+      <field name="configData" type="TChatServerCfgData"/>
+    </struct>
+
+    <!-- WorldBossServer监控数据 -->
+    <struct name="TWorldBossServerMoniteorData" class="true">
+      <field name="baseData" type="TServerMoniteorBaseData"/>
+      <field name="dealProtocolCount" type="int"/>
+    </struct>
+    <sequence name="TWorldBossServerMoniteorDataList" element="TWorldBossServerMoniteorData"/>
+
+    <!-- WorldBossServer配置数据 -->
+    <struct name="TWorldBossServerCfgData" class="true">
+      <field name="gameID" type="int"/>
+      <field name="serverID" type="int"/>
+      <field name="machineName" type="string"/>
+      <field name="lanIPAddr" type="string"/>
+      <field name="inPort" type="int"/>
+      <field name="centerServer" type="TStrKeyValue"/>
+    </struct>
+
+    <!-- WorldBossServer工具数据 -->
+    <struct name="TWorldBossServerTool" class="true">
+      <field name="moniteorData" type="TWorldBossServerMoniteorData"/>
+      <field name="configData" type="TWorldBossServerCfgData"/>
+    </struct>
+    
+    <!-- GateWay监控数据 -->
+    <struct name="TGateWayMoniteorData" class="true">
+      <field name="baseData" type="TServerMoniteorBaseData"/>
+      <field name="dealProtocolCount" type="int"/>
+      <field name="shortClientConectionCount" type="int"/>
+      <field name="longClientConectionCount" type="int"/>
+    </struct>
+    <sequence name="TGateWayMoniteorDataList" element="TGateWayMoniteorData"/>
+
+    <!-- GateWay配置数据 -->
+    <struct name="TGateWayCfgData" class="true">
+      <field name="gameID" type="int"/>
+      <field name="serverID" type="int"/>
+      <field name="machineName" type="string"/>
+      <field name="index" type="int"/>
+      <field name="wanIPAddr" type="string"/>
+      <field name="outShortConnectionPort" type="int"/>
+      <field name="outLongConnectionPort" type="int"/>
+      <field name="inPort" type="int"/>
+      <field name="centerServer" type="TStrKeyValue"/>
+    </struct>
+    <sequence name="TGateWayCfgDataList" element="TGateWayCfgData"/>
+
+    <!-- GateWay工具数据 -->
+    <struct name="TGateWayToolData" class="true">
+      <field name="moniteorData" type="TGateWayMoniteorData"/>
+      <field name="configData" type="TGateWayCfgData"/>
+    </struct>
+    <sequence name="TGateWayToolDataList" element="TGateWayToolData"/>
+
+    <!-- XD Gateway监控数据 -->
+    <struct name="TXDGatewayMoniteorData" class="true">
+      <field name="baseData" type="TServerMoniteorBaseData"/>
+      <field name="dealProtocolCount" type="int"/>
+      <field name="uncheckConnectionCount" type="int"/>
+      <field name="checkingConnectionCount" type="int"/>
+      <field name="shortClientConectionCount" type="int"/>
+      <field name="longClientConectionCount" type="int"/>
+    </struct>
+    <sequence name="TXDGatewayMoniteorDataList" element="TXDGatewayMoniteorData"/>
+
+    <!-- XD Gateway 配置数据 -->
+    <struct name="TXDGatewayCfgData" class="true">
+      <field name="gameID" type="int"/>
+      <field name="machineName" type="string"/>
+      <field name="index" type="int"/>
+      <field name="insideIPAddr" type="string"/>
+      <field name="insidePort" type="int"/>
+      <field name="outsidePort" type="int"/>
+    </struct>
+    <sequence name="TXDGatewayCfgDataList" element="TXDGatewayCfgData"/>
+
+    <!-- XD Gateway 工具数据 -->
+    <struct name="TXDGateWayToolData" class="true">
+      <field name="moniteorData" type="TXDGatewayMoniteorData"/>
+      <field name="configData" type="TXDGatewayCfgData"/>
+    </struct>
+    <sequence name="TXDGateWayToolDataList" element="TXDGateWayToolData"/>
+
+    <!-- 服务器组基础配置 -->
+    <struct name="TServerGroupBaseCfg" class="true">
+      <field name="gameID" type="int"/>
+      <field name="serverID" type="int"/>
+      <field name="serverName" type="string"/>
+      <field name="machineList" type="TStrList"/>
+      <field name="version" type="string"/>
+      <field name="dbIDList" type="TIntList"/>
+    </struct>
+
+    <!-- 服务器组 -->
+    <struct name="TServerGroupMoniteorData" class="true">
+      <field name="gameID" type="int"/>
+      <field name="serverID" type="int"/>
+      <field name="serverState" type="int"/>
+    </struct>
+    
+    <!-- 服务器组工具数据 -->
+    <struct name="TServerGroupToolData" class="true">
+      <field name="configData" type="TServerGroupBaseCfg"/>
+      <field name="moniteorData" type="TServerGroupMoniteorData"/>
+      <field name="centerToolData" type="TCenterServerToolData"/>
+      <field name="dataBaseToolData" type="TDataBaseServerToolData"/>
+      <field name="gameDataToolData" type="TGameDataServerToolData"/>
+      <field name="gameToolDataList" type="TGameServerToolDataList"/>
+      <field name="publicLogicToolData" type="TPublicLogicToolData"/>
+      <field name="rankToolData" type="TRankServerToolData"/>
+      <field name="chatToolData" type="TChatServerToolData"/>
+      <field name="worldBossToolData" type="TWorldBossServerTool"/>
+      <field name="gateWayToolDataList" type="TGateWayToolDataList"/>
+    </struct>
+    <sequence name="TServerGroupToolDataList" element="TServerGroupToolData"/>
+
+    <!-- 服务器组配置 -->
+    <struct name="TServerGroupCfg" class="true">
+      <field name="groupBase" type="TServerGroupBaseCfg"/>
+      <field name="centerCfg" type="TCenterServerCfgData"/>
+      <field name="databaseCfg" type="TDataBaseServerCfgData"/>
+      <field name="gameDataCfg" type="TGameDataServerCfgData"/>
+      <field name="gameCfgList" type="TGameServerCfgDataList"/>
+      <field name="publicLogicCfg" type="TPublicLogicServerCfgData"/>
+      <field name="rankCfg" type="TRankServerCfgData"/>
+      <field name="chatCfg" type="TChatServerCfgData"/>
+      <field name="worldBossCfg" type="TWorldBossServerCfgData"/>
+      <field name="gatewayCfgList" type="TGateWayCfgDataList"/>
+    </struct>
+
+    <!-- 物理机监控信息 -->
+    <struct name="TMachineMoniteorData" class="true">
+      <field name="machineName" type="string"/>
+      <field name="ip" type="string"/>
+      <field name="state" type="int"/>
+    </struct>
+    <sequence name="TMachineMoniteorDataList" element="TMachineMoniteorData"/>
+
+    <!-- int key/string value -->
+    <struct name="TIntKeyStrValue" class="true">
+      <field name="key" type="int"/>
+      <field name="value" type="string"/>
+    </struct>
+    <sequence name="TIntKeyStrValueList" element="TIntKeyStrValue"/>
+    
+    <struct name="TConnectionCheck" class="true">
+      <field name="clientSessionID" type="int"/>
+      <field name="gameChannleID" type="int"/>
+      <field name="isLongConnection" type="bool"/>
+      <field name="isPassedCheck" type="bool"/>
+      <field name="playerFlagID" type="long"/>
+    </struct>
+
+  </datastructures>
+  
+  <service name="InternalProtocol">
+    
+    <client>
+    <!--活跃通知-->
+    <transaction name="ActivePingSvr">
+    </transaction>
+
+    <!--向CenterServer注册服务器-->
+    <transaction name="RegisterSvr">
+       <param name="svrInfo" type="PtServerInfo"/>
+    </transaction>
+
+    <!-- 向CenterServer重新注册服务器 -->
+    <transaction name="ReRegisterSvr">
+      <param name="svrInfo" type="PtServerInfo"/>
+    </transaction>
+
+    <!-- 通知连接者信息 -->
+    <transaction name="NotifyConnectorSvr">
+      <!-- 服务器信息 -->
+      <param name="svrinfo" type="PtServerInfo"/>
+    </transaction>
+
+    <!-- 通知玩家分配信息 -->
+    <transaction name="NotifyPlayerSvrAllocInfo">
+      <!-- 玩家ID -->
+      <param name="longinName" type="string"/>
+      <!-- 服务分配信息 -->
+      <param name="allocSvrList" type="PtPlayerAllocSvrList"/>
+    </transaction>
+
+    <!-- 通知玩家、角色们分配信息 -->
+    <transaction name="NotifyPlayerListSvrAllocInfo">
+      <!-- 玩家\角色ID列表 -->
+      <param name="longinNameList" type="TStrList"/>
+      <!-- 服务分配信息 -->
+      <param name="allocSvrList" type="PtPlayerAllocSvrList"/>
+    </transaction>
+
+    <!-- 通知玩家分配信息变化 -->
+    <transaction name="NotifyPlayerSvrAllocUpdate">
+      <param name="userID" type="PtGuid"/>
+      <param name="allocSvrInfo" type="PtPlayerAllocSvrInfo"/>
+    </transaction>
+
+    <!-- 删除角色分配信息 -->
+    <transaction name="NoticeDeleteCharacterAllocSvrInfo">
+      <param name="charaID" type="PtGuid"/>
+    </transaction>
+
+      <!-- 执行指令 -->
+      <transaction name="DealCommand">
+        <param name="command" type="string"/>
+      </transaction>
+        
+    </client>
+
+    <server>
+      
+      <!-- 通知客户端服务器超过一定时间没收到其任何消息了，客户端需要立即发送ActivePingSvr给服务器 -->
+      <transaction name="ActivePingSvrTimeOut">
+      </transaction>
+
+      <!-- 收到CenterServer服务器注册成功的通知 -->
+      <transaction name="RegisterSvrOK">
+        <!-- 接收注册的服务器信息 -->
+        <param name="svrinfo" type="PtServerInfo"/>
+        <!-- 已注册的服务器列表 -->
+        <param name="regedsvrlist" type="PtServerList"/>
+      </transaction>
+
+      <!-- 收到CenterServer服务器注册失败的通知 -->
+      <transaction name="RegisterSvrFail">
+        <!-- 错误信息 -->
+        <param name="errcode" type="int"/>
+        <!-- 接收注册的服务器信息 -->
+        <param name="svrinfo" type="PtServerInfo"/>
+      </transaction>
+
+      <!-- 通知服务器关闭 -->
+      <transaction name="ShutDownSvr">
+        <!-- 参数 -->
+        <param name="param" type="string"/>
+      </transaction>
+
+      <!-- 通知服务器连接成功 -->
+      <transaction name="ConnectSvrSucc">
+        <!-- 接受连接的服务器信息 -->
+        <param name="svrinfo" type="PtServerInfo"/>
+      </transaction>
+
+      <!-- 通知服务器连接失败 -->
+      <transaction name="ConnectSvrFail">
+        <!-- 错误信息 -->
+        <param name="errcode" type="int"/>
+        <!-- 连接的服务器信息 -->
+        <param name="svrinfo" type="PtServerInfo"/>
+      </transaction>
+
+      <!-- 向CenterServer重新注册服务器成功 -->
+      <transaction name="ReRegisterSvrOK">
+        <param name="svrInfo" type="PtServerInfo"/>
+      </transaction>
+
+      <!-- 向CenterServer重新注册服务器失败 -->
+      <transaction name="ReRegisterSvrFail">
+        <param name="errCode" type="int"/>
+        <param name="errMsg" type="string"/>
+      </transaction>
+      
+      <!-- 报告服务器组ID -->
+      <transaction name="ReportServerID">
+        <param name="serverID" type="int"/>
+      </transaction>
+      
+    </server>
+    
+  </service>
+  
+  <service name="MoniteorServerDataProtocol">
+    
+    <client>
+
+      <!-- 心跳协议 -->
+      <transaction name="HeartBeat">
+        <param name="serverName" type="string"/>
+      </transaction>
+      
+      <!-- 更新CenterServer数据 -->
+      <transaction name="UpdateCenterServerMoniteorData">
+        <param name="serverData" type="TCenterServerMoniteorData"/>
+      </transaction>
+
+      <!-- 更新DataBaseServer数据 -->
+      <transaction name="UpdateDataBaseServerMoniteorData">
+        <param name="serverData" type="TDataBaseServerMoniteorData"/>
+      </transaction>
+
+      <!-- 更新GameDataServer数据 -->
+      <transaction name="UpdateGameDataServerMoniteorData">
+        <param name="serverData" type="TGameDataServerMoniteorData"/>
+      </transaction>
+
+      <!-- 更新GameServer数据 -->
+      <transaction name="UpdateGameServerMoniteorData">
+        <param name="serverData" type="TGameServerMoniteorData"/>
+      </transaction>
+
+      <!-- 更新PublicLogicServer数据 -->
+      <transaction name="UpdatePublicLogicServerMoniteorData">
+        <param name="serverData" type="TPublicLogicServerMoniteorData"/>
+      </transaction>
+      
+      <!-- 更新RankServer数据 -->
+      <transaction name="UpdateRankServerMoniteorData">
+        <param name="serverData" type="TRankServerMoniteorData"/>
+      </transaction>
+
+      <!-- 更新ChatServer数据 -->
+      <transaction name="UpdateChatServerMoniteorData">
+        <param name="serverData" type="TChatServerMoniteorData"/>
+      </transaction>
+
+      <!-- 更新WorldBossServer数据 -->
+      <transaction name="UpdateWorldBossServerMoniteorData">
+        <param name="serverData" type="TWorldBossServerMoniteorData"/>
+      </transaction>
+
+      <!-- 更新GateWay数据 -->
+      <transaction name="UpdateGateWayMoniteorData">
+        <param name="serverData" type="TGateWayMoniteorData"/>
+      </transaction>
+
+      <!-- 更新Portal数据 -->
+      <transaction name="UpdatePortalMoniteorData">
+        <param name="serverData" type="TPortalServerMoniteorData"/>
+      </transaction>
+
+      <!-- 报告服务器状态 -->
+      <transaction name="ReportServerState">
+        <param name="serverName" type="string"/>
+        <param name="state" type="int"/>
+      </transaction>
+
+      <!-- 通知服务器启动 -->
+      <transaction name="NotifyServerRun">
+        <param name="serverName" type="string"/>
+        <param name="isRun" type="bool"/>
+      </transaction>
+
+      <!-- 通知Portal服务器启动 -->
+      <transaction name="NotifyPortalRun">
+        <param name="serverName" type="string"/>
+        <param name="isRun" type="bool"/>
+      </transaction>
+      
+    </client>
+    
+  </service>
+
+  <service name="ProtocolTranspond">
+
+    <client>
+      <transaction name="Transpond2Server">
+        <param name="serverType" type="eServerType"/>
+        <param name="datas" type="ByteArray"/>
+      </transaction>
+    </client>
+  </service>
+  
+</package>

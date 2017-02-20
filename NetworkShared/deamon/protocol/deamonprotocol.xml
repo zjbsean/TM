@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<package name ="com.tieao.mmo.deamon">
+  <using>
+  </using>
+  <datastructures>
+    <struct name ="MachineInfo" class="true">
+      <field name="id" type="string"/>
+      <field name="memory" type="int"/>
+      <field name="cpu" type="float"/>
+      <field name="cores" type="int"/> 
+    </struct>
+    <sequence name="MachineInfoSequence" element="MachineInfo"/>
+
+    <struct name ="ApplicationInfo" class="true">
+      <field name="id" type="string"/>
+      <field name="application" type="string"/>
+      <field name="description" type="string"/>
+    </struct>
+    <sequence name="ApplicationInfoSequence" element="ApplicationInfo"/>
+       
+    <struct name ="VersionInfo" class="true">
+      <field name="id" type="string"/>
+      <field name="application" type="string"/>
+      <field name="folder" type="string"/>
+      <field name="releaseDate" type="string"/>
+      <field name="instances" type="int"/>
+    </struct>
+    <sequence name="VersionInfoSequence" element="VersionInfo"/>
+
+    <struct name ="Customizer" class="true">
+      <field name="file" type="string"/>
+      <field name="fieldName" type="string"/>
+      <field name="fileValueSH" type="string"/>
+      <field name="fieldValue" type="string"/>
+    </struct>
+    <sequence name="CustomizerSequence" element="Customizer"/>
+
+    <struct name ="AppInstance" class="true">
+      <field name="appId" type="string"/>
+      <field name="versionId" type="string"/>
+      <field name="instanceId" type="string"/>
+      <field name="executable" type="string"/>
+      <field name="folderr" type="string"/>
+      <field name="param" type="string"/>
+      <field name="startTime" type="string"/>
+      
+      <field name="customizers" type="CustomizerSequence"/>
+    </struct>
+    <sequence name="AppInstanceSequence" element="AppInstance"/>
+    <sequence name="StringSequence" element="string"/>
+
+  </datastructures>
+
+  <service name="Deamon">
+    <server>
+      <transaction name="GetInstanceList">
+        <param name="appId" type="int"/>
+      </transaction>
+
+      <transaction name="GetMachineState">
+      </transaction>
+
+      <transaction name="DeployInstance">
+        <param name="instance" type="AppInstance"/>        
+      </transaction>
+
+      <transaction name="StartInstance">
+        <param name="instanceId" type="string"/>
+        <param name="param" type="string"/>
+      </transaction>
+      
+      <transaction name="StopInstance">
+        <param name="instanceId" type="string"/>        
+      </transaction>
+    </server>
+    <client>
+      <transaction name="GetInstanceListResponse">
+        <param name="instances" type="AppInstanceSequence"/>
+      </transaction>
+
+      <transaction name="GetMachineResponse">
+        <param name="instances" type="MachineInfo"/>
+      </transaction>
+
+      <transaction name="StartInstanceResult">
+        <param name="result" type="int"/>
+        <param name="message" type="string"/>
+      </transaction>
+
+      <transaction name="StopInstanceResult">
+        <param name="result" type="int"/>
+        <param name="message" type="string"/>
+      </transaction>
+    </client>
+  </service>
+</package>

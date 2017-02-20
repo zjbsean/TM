@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+  <package name ="com.tieao.mmo.CustomTypeInProtocol">
+  <using>
+  </using>
+  
+  <datastructures>
+    
+    <sequence name="TIntList" element="int"/>
+    <sequence name="TStrList" element="string"/>
+    <sequence name="TByteList" element="byte"/>
+    <sequence name="TLongList" element="long"/>
+
+    <struct name="TIDStrKeyValue" class="true">
+      <field name="ID" type="int"/>
+      <field name="Key" type="string"/>
+      <field name="Value" type="string"/>
+    </struct>
+    <sequence name="TIDStrKeyValueList" element="TIDStrKeyValue"/>
+    
+    <struct name="TIntKeyValue" class="true">
+      <field name="key" type="int"/>
+      <field name="value" type="int"/>
+    </struct>
+    <sequence name="TIntKeyValueList" element="TIntKeyValue"/>
+    
+    <struct name="TStrKeyValue" class="true">
+      <field name="key" type="string"/>
+      <field name="value" type="string"/>
+    </struct>
+    <sequence name="TStrKeyValueList" element="TStrKeyValue"/>
+    
+    <!--全局ID-->
+    <struct name="PtGuid" class="true">
+      <field name="a" type="int"/>
+      <field name="b" type="short"/>
+      <field name="c" type="short"/>
+      <field name="d" type="byte"/>
+      <field name="e" type="byte"/>
+      <field name="f" type="byte"/>
+      <field name="g" type="byte"/>
+      <field name="h" type="byte"/>
+      <field name="i" type="byte"/>
+      <field name="j" type="byte"/>
+      <field name="k" type="byte"/>
+    </struct>
+    <sequence name="PtGuidList" element="PtGuid"/>
+
+    <struct name="TItem" class="true">
+      <field name="id" type="long"/>
+      <field name="name" type="string"/>
+      <field name="desc" type="string"/>
+      <field name="marks" type="TStrList"/>
+    </struct>
+    <sequence name="TItemList" element="TItem"/>
+    
+    <struct name="TAccount" class="true">
+      <field name="account" type="string"/>
+      <field name="token" type="string"/>
+      <field name="showName" type="string"/>
+      <field name="power" type="int"/>
+      <field name="createTime" type="string"/>
+    </struct>
+    <sequence name="TAccountList" element="TAccount"/>
+
+    <struct name="TBusinessItem" class="true">
+      <field name="itemID" type="long"/>
+      <field name="count" type="int"/>
+      <field name="mark" type="string"/>
+      <field name="price" type="float"/>
+    </struct>
+    <sequence name="TBusinessItemList" element="TBusinessItem"/>
+    
+    <struct name="TBuyerOrder" class="true">
+      <field name="buyerID" type="long"/>
+      <field name="orderID" type="string"/>
+      <field name="makeTime" type="string"/>
+      <field name="buyItems" type="TBusinessItemList"/>
+      <field name="state" type="int"/>
+    </struct>
+    <sequence name="TBuyerOrderList" element="TBuyerOrder"/>
+    
+    <struct name="TSellerOrder" class="true">
+      <field name="sellerID" type="long"/>
+      <field name="orderID" type="string"/>
+      <field name="theBuyerOrderID" type="string"/>
+      <field name="makeTime" type="string"/>
+      <field name="sellItems" type="TBusinessItemList"/>
+      <field name="state" type="int"/>
+    </struct>
+    <sequence name="TSellerOrderList" element="TSellerOrder"/>
+    
+    <struct name="TBuyer" class="true">
+      <field name="id" type="long"/>
+      <field name="name" type="string"/>
+      <field name="desc" type="string"/>
+      <field name="country" type="string"/>
+      <field name="address" type="string"/>
+      <field name="tel" type="string"/>
+      <field name="linkMans" type="TStrKeyValueList"/>
+    </struct>
+    <sequence name="TBuyerList" element="TBuyer"/>
+
+    <struct name="TSeller" class="true">
+      <field name="id" type="long"/>
+      <field name="name" type="string"/>
+      <field name="desc" type="string"/>
+      <field name="country" type="string"/>
+      <field name="address" type="string"/>
+      <field name="tel" type="string"/>
+      <field name="linkMans" type="TStrKeyValueList"/>
+    </struct>
+    <sequence name="TSellerList" element="TSeller"/>
+    
+    <struct name="TShipping" class="true">
+      <field name="id" type="long"/>
+      <field name="name" type="string"/>
+      <field name="desc" type="string"/>
+      <field name="country" type="string"/>
+      <field name="address" type="string"/>
+      <field name="tel" type="string"/>
+      <field name="linkMans" type="TStrKeyValueList"/>
+    </struct>
+    <sequence name="TShippingList" element="TShipping"/>
+    
+  </datastructures>
+</package>

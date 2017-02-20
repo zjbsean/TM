@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<package name ="com.tieao.mmo.protocol">
+  <using>
+    <package name ="com.tieao.mmo.CustomTypeInProtocol"/>
+  </using>
+  
+  <service name="OperatorRequest">
+    <client>
+      
+      <!-- 登录 -->
+      <transaction name="Login">
+        <param name="account" type="string"/>
+        <param name="token" type="string"/>
+      </transaction>
+
+    </client>
+   
+    <server>
+
+      <!-- 登录返回 -->
+      <transaction name="LoginBack">
+        <param name="account" type="string"/>
+        <param name="errMsg" type="string"/>
+      </transaction>
+      
+    </server>
+    
+  </service>
+
+</package>

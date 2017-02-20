@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<package name ="com.tieao.mmo.deamon">
+  <using>
+  </using>
+  <datastructures>
+    <struct name ="WorldState" class="true">
+      <field name="timestamp" type="int"/>
+      <field name="logons" type="int"/>
+      <field name="sdkresponse" type="float"/>
+      <field name="refills" type="int"/> 
+      <field name="refilltotal" type="int"/>
+      <field name="serials" type="int"/>
+      <field name="lastlogontime" type="int"/>
+      <field name="newusers" type="int"/>
+    </struct>
+
+    <struct name ="VillageState" class="true">
+      <field name="timestamp" type="int"/>
+      <field name="logons" type="int"/>
+      <field name="logonresponse" type="float"/>
+      <field name="paymenttoday" type="int"/>
+    </struct>
+
+    <struct name ="PortalState" class="true">
+      <field name="timestamp" type="int"/>
+      <field name="logons" type="int"/>
+      <field name="logonresponse" type="float"/>
+    </struct>
+
+    <struct name ="UpdaterState" class="true">
+      <field name="timestamp" type="int"/>
+      <field name="andoirdapp" type="string"/>
+      <field name="andoirdres" type="string"/>
+      <field name="iosapp" type="string"/>
+      <field name="iosres" type="string"/>
+    </struct>
+
+    <struct name ="BattleState" class="true">
+      <field name="timestamp" type="int"/>
+      <field name="currentcount" type="string"/>
+      <field name="maxcount" type="string"/>
+    </struct>
+
+  </datastructures>
+
+  <service name="Monitor">
+    <server>
+      <transaction name="QueryStatus">
+        <param name="catagory" type="int"/>
+      </transaction>
+
+      <transaction name="ExecuteCommand">
+        <param name="command" type="string"/>
+      </transaction>
+    </server>
+    <client>
+      <transaction name="StatusReport">
+        <param name="status" type="ByteArray"/>
+      </transaction>
+      <transaction name="SendMessage">
+        <param name="message" type="string"/>
+      </transaction>
+      <transaction name="CommandResult">
+        <param name="command" type="string"/>
+        <param name="result" type="int"/>
+        <param name="message" type="string"/>
+      </transaction>
+    </client>
+  </service>
+  <service name="WorldReport">
+    <client>
+      <transaction name="ReportStatus">
+        <param name="status" type="WorldState"/>
+      </transaction>
+    </client>
+  </service>
+
+  <service name="VillageReport">
+    <client>
+      <transaction name="ReportStatus">
+        <param name="status" type="VillageState"/>
+      </transaction>
+    </client>
+  </service>
+
+  <service name="PortalReport">
+    <client>
+      <transaction name="ReportStatus">
+        <param name="status" type="PortalState"/>
+      </transaction>
+    </client>
+  </service>
+
+  <service name="UpdaterReport">
+    <client>
+      <transaction name="ReportStatus">
+        <param name="status" type="UpdaterState"/>
+      </transaction>
+    </client>
+  </service>
+
+  <service name="BattleReport">
+    <client>
+      <transaction name="ReportStatus">
+        <param name="status" type="BattleState"/>
+      </transaction>
+    </client>
+  </service>
+</package>
